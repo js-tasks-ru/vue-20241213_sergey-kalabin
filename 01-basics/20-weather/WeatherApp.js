@@ -27,10 +27,13 @@ export default defineComponent({
       return result;
     };
 
+    // function findSunDay( actualTime, sunriseTime, sunsetTime ) {
+    //   return {
+    //     'weather-card--night': !( actualTime > sunriseTime && actualTime < sunsetTime ),
+    //   }
+    // };
     function findSunDay( actualTime, sunriseTime, sunsetTime ) {
-      return {
-        'weather-card--night': !( actualTime > sunriseTime && actualTime < sunsetTime ),
-      }
+      return actualTime > sunriseTime && actualTime < sunsetTime;
     };
 
     return {
@@ -50,7 +53,8 @@ export default defineComponent({
     <div>
       <h1 class="title">Погода в Средиземье</h1>
       <ul v-for="cards of weatherData" :ref="weatherData" class="weather-list unstyled-list">
-        <li class="weather-card" :class="findSunDay( cards.current.dt, cards.current.sunrise, cards.current.sunset )">
+        <!-- <li class="weather-card" :class="findSunDay( cards.current.dt, cards.current.sunrise, cards.current.sunset )"> -->
+        <li class="weather-card" :class="{ 'weather-card--night': !findSunDay( cards.current.dt, cards.current.sunrise, cards.current.sunset ) }">
           <div v-if:="cards.alert" class="weather-alert">
             <span class="weather-alert__icon">⚠️</span>
             <span class="weather-alert__description">{{ cards.alert.sender_name }}: {{ cards.alert.description }}</span>
