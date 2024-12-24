@@ -31,7 +31,7 @@ export default defineComponent({
     //   return {
     //     'weather-card--night': !( actualTime > sunriseTime && actualTime < sunsetTime ),
     //   }
-    // };
+    // }; 
     function findSunDay( actualTime, sunriseTime, sunsetTime ) {
       return actualTime > sunriseTime && actualTime < sunsetTime;
     };
