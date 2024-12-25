@@ -5,8 +5,8 @@ export default defineComponent({
 
   setup() {
     // Реактивные переменные для хранения координат метки
-    let x = ref(0);
-    let y = ref(0);
+    const x = ref(0);
+    const y = ref(0);
 
     /**
      * Обработчик клика по карте для установки координат метки
