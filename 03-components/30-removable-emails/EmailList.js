@@ -15,6 +15,18 @@ export default defineComponent({
     },
   },
 
+  emits: ['removeItem'],
+
+  setup(props, { emit }) {
+    function removeItem(index) {
+      emit('removeItem', index)
+    }
+
+    return {
+      removeItem
+    }
+  },
+
   template: `
     <ul class="emails-list unstyled-list" aria-label="Emails">
       <EmailListItem
@@ -22,6 +34,7 @@ export default defineComponent({
         :key="email"
         :email="email"
         :marked="isMarked"
+        @remove="removeItem(index)"
       />
     </ul>
   `,
