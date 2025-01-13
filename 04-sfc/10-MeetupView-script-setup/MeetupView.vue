@@ -1,24 +1,50 @@
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+// import { defineComponent } from 'vue'
 import { UiAlert, UiContainer } from '@shgk/vue-course-ui'
 import MeetupAgenda from './MeetupAgenda.vue'
 import MeetupDescription from './MeetupDescription.vue'
 import MeetupCover from './MeetupCover.vue'
 import MeetupInfo from './MeetupInfo.vue'
 
-export default defineComponent({
-  name: 'MeetupView',
+// props: {
+//   meetup: {
+//     type: Object,
+//     required: true,
+//   }
+// },
 
-  components: {
-    UiAlert,
-    UiContainer,
+const props = defineProps({
+  meetup: {
+    type: Object,
+    required: true,
   },
 })
+
+// export default defineComponent({
+//   name: 'MeetupView',
+
+//   components: {
+//     UiAlert,
+//     UiContainer,
+//     MeetupAgenda,
+//     MeetupDescription,
+//     MeetupCover,
+//     MeetupInfo,
+//   },
+
+//   props: {
+//     meetup: {
+//       type: Object,
+//       required: true,
+//     }
+//   },
+// })
 </script>
 
 <template>
   <div>
     <!-- Обложка митапа -->
+    <MeetupCover :title="meetup.title" :image="meetup.image" />
 
     <UiContainer>
       <div class="meetup">
@@ -26,15 +52,19 @@ export default defineComponent({
           <h2>Описание</h2>
 
           <!-- Описание митапа -->
+          <MeetupDescription :description="meetup.description" />
 
           <h2>Программа</h2>
 
           <!-- Программа митапа -->
+          <MeetupAgenda v-if="Object.keys( meetup.agenda ).length !== 0" :agenda="meetup.agenda" />
           <!-- Или при пустой программе - сообщение "Программа пока пуста..." в UiAlert -->
-          <UiAlert></UiAlert>
+          <UiAlert v-else>Программа пока пуста...</UiAlert>
+
         </div>
         <div class="meetup__aside">
           <!-- Краткая информация о митапе -->
+          <MeetupInfo :organizer="meetup.organizer" :place="meetup.place" :date="meetup.date" />
 
           <div class="meetup__aside-buttons"></div>
         </div>
@@ -51,8 +81,7 @@ export default defineComponent({
   margin-block-start: var(--spacing-large);
 }
 
-.meetup__content {
-}
+.meetup__content {}
 
 .meetup__aside {
   display: flex;

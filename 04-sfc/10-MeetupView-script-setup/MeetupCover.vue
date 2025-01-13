@@ -1,26 +1,18 @@
-<script>
+<script setup>
 import { computed, defineComponent } from 'vue'
 
-export default defineComponent({
-  name: 'MeetupCover',
-
-  props: {
-    title: {
-      type: String,
-    },
-
-    image: {
-      type: String,
-    },
+const props = defineProps({
+  title: {
+    type: String,
   },
 
-  setup(props) {
-    const bgStyle = computed(() => (props.image ? { '--bg-url': `url('${props.image}')` } : undefined))
-    return {
-      bgStyle,
-    }
+  image: {
+    type: String,
   },
-})
+});
+
+const bgStyle = computed(() => (props.image ? { '--bg-url': `url('${props.image}')` } : undefined));
+
 </script>
 
 <template>
