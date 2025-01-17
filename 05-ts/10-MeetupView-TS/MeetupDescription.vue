@@ -1,9 +1,14 @@
-<script setup>
-defineProps({
-  description: {
-    type: String,
-  },
-})
+<script setup lang="ts">
+// defineProps({
+//   description: {
+//     type: String,
+//   },
+// })
+
+// const props = defineProps< { description:String} >();
+
+defineProps< { description: string} >();
+
 </script>
 
 <template>
